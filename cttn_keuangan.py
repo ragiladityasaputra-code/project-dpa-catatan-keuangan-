@@ -19,26 +19,35 @@ def load_data():
 
 #Fungsi untuk menyimpan data
 def save_data(transaksi):
-    with open("data.txt", "w") as file:
-        for t in transaksi:
-            line = f"{t["Tipe"]}|{t["Jumlah"]}|{t["Keterangan"]}\n"
-            file.write(line)
+    try:
+        with open("data.txt", "w") as file:
+            for t in transaksi:
+                line = f"{t["Tipe"]}|{t["Jumlah"]}|{t["Keterangan"]}\n"
+                file.write(line)
+    except KeyError as e:
+        print(f"Error: Terjadi kesalahan transaksi: {e}")
 
 #Fungsi tambah pemasukan
 def tambah_pemasukan(transaksi):
-    jumlah = int(input("Masukkan jumlah pemasukan: "))
-    keterangan = input("Keterangan: ")
-    transaksi.append({"Tipe": "Pemasukan", "Jumlah": jumlah, "Keterangan": keterangan})
-    save_data(transaksi)
-    print("Pemasukan berhasil ditambahkan.\n")
+    try:
+        jumlah = int(input("Masukkan jumlah pemasukan: "))
+        keterangan = input("Keterangan: ")
+        transaksi.append({"Tipe": "Pemasukan", "Jumlah": jumlah, "Keterangan": keterangan})
+        save_data(transaksi)
+        print("Pemasukan berhasil ditambahkan.\n")
+    except ValueError:
+        print("Error: Jumlah pemasukan harus berupa bilangan bulat.\n")
 
 #Fungsi tambah pengeluaran
 def tambah_pengeluaran(transaksi):
-    jumlah = int(input("Masukkan jumlah pengeluaran: "))
-    keterangan = input("Keterangan: ")
-    transaksi.append({"Tipe": "Pengeluaran", "Jumlah": jumlah, "Keterangan": keterangan})
-    save_data(transaksi)
-    print("Pengeluaran berhasil ditambahkan.\n")
+    try:
+        jumlah = int(input("Masukkan jumlah pengeluaran: "))
+        keterangan = input("Keterangan: ")
+        transaksi.append({"Tipe": "Pengeluaran", "Jumlah": jumlah, "Keterangan": keterangan})
+        save_data(transaksi)
+        print("Pengeluaran berhasil ditambahkan.\n")
+    except ValueError:
+        print("Error: Jumlah penegluaran harus bilangan bulat.\n")
 
 #Fungsi menampilkan transaksi
 def tampilkan_transaksi(transaksi):
