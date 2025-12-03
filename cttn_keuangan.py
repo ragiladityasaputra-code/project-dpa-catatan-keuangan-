@@ -55,7 +55,7 @@ def menu():
     transaksi = load_data()
 
     while True:
-        print("=== PROGRAM CATATAN KEUANGAN HARIAN ===")
+        print("=== CATATAN KEUANGAN HARIAN ===")
         print("1. Tambah Pemasukan")
         print("2. Tambah Pengeluaran")
         print("3. Tampilkan Semua Transaksi")
