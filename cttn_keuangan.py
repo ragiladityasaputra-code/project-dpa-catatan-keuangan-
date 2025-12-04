@@ -47,7 +47,7 @@ def tambah_pengeluaran(transaksi):
         save_data(transaksi)
         print("Pengeluaran berhasil ditambahkan.\n")
     except ValueError:
-        print("Error: Jumlah penegluaran harus bilangan bulat.\n")
+        print("Error: Jumlah pengeluaran harus bilangan bulat.\n")
 
 #Fungsi menampilkan transaksi
 def tampilkan_transaksi(transaksi):
