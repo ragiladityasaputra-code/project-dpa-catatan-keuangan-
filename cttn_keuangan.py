@@ -1,7 +1,6 @@
-transaksi = []
-
 #Fungsi untuk memuat data
 def load_data():
+    data = []
     try:
         with open("data.txt", "r") as file:
             for line in file:
@@ -9,23 +8,24 @@ def load_data():
                 if line:
                     parts = line.split("|")
                     if len(parts) == 3:
-                        transaksi.append({
+                        data.append({
                             "Tipe": parts[0],
                             "Jumlah": int(parts[1]),
                             "Keterangan": parts[2]
                         })
     except FileNotFoundError:
         print("File belum ada, data kosong. \n")
+    return data
 
 #Fungsi untuk menyimpan data
 def save_data(transaksi):
     try:
         with open("data.txt", "w") as file:
             for t in transaksi:
-                line = f"{t["Tipe"]}|{t["Jumlah"]}|{t["Keterangan"]}\n"
+                line = f"{t['Tipe']}|{t['Jumlah']}|{t['Keterangan']}\n"
                 file.write(line)
-    except KeyError as e:
-        print(f"Error: Terjadi kesalahan transaksi: {e}")
+    except KeyError:
+        print(f"Error: Terjadi kesalahan transaksi.")
 
 #Fungsi tambah pemasukan
 def tambah_pemasukan(transaksi):
@@ -51,19 +51,16 @@ def tambah_pengeluaran(transaksi):
 
 #Fungsi menampilkan transaksi
 def tampilkan_transaksi(transaksi):
-    try:
-        if not transaksi:
-            print("Belum ada catatan transaksi.\n")
-            return
+    if not transaksi:
+        print("Belum ada catatan transaksi.\n")
+        return
     
-        print("\n=== DAFTAR TRANSAKSI ===")
-        nomor_urut = 1
-        for t in transaksi:
-            print(f"{nomor_urut}. {t['Tipe'].upper()} - Rp{t['Jumlah']} ({t['Keterangan']})")
-            nomor_urut += 1
-        print()
-    except:
-        print("Error tidak terduga saat menampilkan transaksi")
+    print("\n=== DAFTAR TRANSAKSI ===")
+    nomor_urut = 1
+    for t in transaksi:
+        print(f"{nomor_urut}. {t['Tipe'].upper()} - Rp{t['Jumlah']} ({t['Keterangan']})")
+        nomor_urut += 1
+    print()
 
 #Fungsi hitung saldo
 def hitung_saldo(transaksi):
